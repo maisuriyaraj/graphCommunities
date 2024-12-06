@@ -1,0 +1,12 @@
+#headerMain .logo {
+        color: #16a34a;
+        font-size: 25px;
+        font-family: "Abril Fatface", serif;
+}
+
+
+#headerMain .logo span {
+    font-size: 18px;
+    color: black;
+    font-family: "Courgette", cursive;
+}

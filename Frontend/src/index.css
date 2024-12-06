@@ -1,0 +1,37 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.hide{
+    /* display: none; */
+    width: 0;
+    transition: width 0.3s ease;
+    *{
+        opacity: 0;
+        display: none;
+        transition: display 0.3s ease;
+    }
+}
+
+.show{
+    width: 250px;
+    transition: width 0.3s ease;
+    *{
+        opacity: 1;
+        transition: display 0.3s ease;
+    }
+}
+
+.main-layout{
+    width: 85%;
+    margin-left: auto;
+    overflow: hidden;
+    margin-top: 7%;
+}
+
+@media screen and (max-width : 1100px){
+    .main-layout{
+        width: 100%;
+        margin-top: 7%;
+    }
+}

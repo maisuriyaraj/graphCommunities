@@ -1,0 +1,253 @@
+@import url('bootstrap-icons/font/bootstrap-icons.min.css');
+@import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Courgette&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+p,
+a {
+    font-family: "Montserrat", sans-serif;
+
+}
+
+#hero_section {
+    height: 100vh;
+    background-image: url('./assets/home-back.jpg') !important;
+    background-position: center;
+    background-size: cover;
+}
+
+.header-normal {
+    background-color: white;
+
+    .logo {
+        color: #16a34a;
+        font-size: 25px;
+        font-family: "Abril Fatface", serif;
+
+        span {
+            font-size: 18px;
+            color: black;
+            font-family: "Courgette", cursive;
+        }
+
+    }
+
+    li {
+        color: black;
+    }
+}
+
+.activeNav {
+    background-color: #16a34a;
+    color: white !important;
+}
+
+.header-advance {
+    background-color: none;
+    box-shadow: none;
+
+    .logo {
+        color: #00ff5e;
+        font-size: 25px;
+        font-family: "Abril Fatface", serif;
+
+        span {
+            font-size: 18px;
+            color: white;
+            font-family: "Courgette", cursive;
+        }
+
+    }
+}
+
+.hero-title-div {
+    background-color: rgba(0, 0, 0, 0.474);
+    background-position: center;
+    background-size: cover;
+    height: 100vh;
+
+    .hero-logo {
+        color: #16a34a;
+        font-size: 6rem;
+        font-family: "Abril Fatface", serif;
+    }
+
+    .logo-span {
+        font-size: 4rem;
+        color: white;
+        font-family: "Courgette", cursive;
+    }
+
+    .slogen {
+        font-size: 1.5rem;
+        color: white;
+        font-family: "Courgette", cursive;
+    }
+}
+/* Up Down Animation  */
+#about_section{
+    .hero_heading {
+        color: #16a34a;
+        font-family: "Poppins", sans-serif;
+    }
+}
+
+#community{
+    .hero_title_about{
+        color: #16a34a;
+        font-family: "Poppins", sans-serif;
+    }
+}
+
+.up-down {
+    animation: up-down linear 4s;
+    animation-iteration-count: infinite;
+    transform-origin: 50% 50%;
+    -webkit-animation: up-down linear 4s;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-transform-origin: 50% 50%;
+    -moz-animation: up-down linear 4s;
+    -moz-animation-iteration-count: infinite;
+    -moz-transform-origin: 50% 50%;
+    -o-animation: up-down linear 4s;
+    -o-animation-iteration-count: infinite;
+    -o-transform-origin: 50% 50%;
+    -ms-animation: up-down linear 4s;
+    -ms-animation-iteration-count: infinite;
+    -ms-transform-origin: 50% 50%;
+}
+
+@keyframes up-down {
+    0% {
+        transform: translate(1px, 20px);
+    }
+
+    24% {
+        transform: translate(1px, 30px);
+    }
+
+    50% {
+        transform: translate(1px, 12px);
+    }
+
+    74% {
+        transform: translate(1px, 22px);
+    }
+
+    100% {
+        transform: translate(1px, 22px);
+    }
+}
+
+@-moz-keyframes up-down {
+    0% {
+        -moz-transform: translate(1px, 20px);
+    }
+
+    24% {
+        -moz-transform: translate(1px, 30px);
+    }
+
+    50% {
+        -moz-transform: translate(1px, 12px);
+    }
+
+    74% {
+        -moz-transform: translate(1px, 22px);
+    }
+
+    100% {
+        -moz-transform: translate(1px, 22px);
+    }
+}
+
+@-webkit-keyframes up-down {
+    0% {
+        -webkit-transform: translate(1px, 20px);
+    }
+
+    24% {
+        -webkit-transform: translate(1px, 30px);
+    }
+
+    50% {
+        -webkit-transform: translate(1px, 12px);
+    }
+
+    74% {
+        -webkit-transform: translate(1px, 22px);
+    }
+
+    100% {
+        -webkit-transform: translate(1px, 22px);
+    }
+}
+
+@-o-keyframes up-down {
+    0% {
+        -o-transform: translate(1px, 20px);
+    }
+
+    24% {
+        -o-transform: translate(1px, 30px);
+    }
+
+    50% {
+        -o-transform: translate(1px, 12px);
+    }
+
+    74% {
+        -o-transform: translate(1px, 22px);
+    }
+
+    100% {
+        -o-transform: translate(1px, 22px);
+    }
+}
+
+@-ms-keyframes up-down {
+    0% {
+        -ms-transform: translate(1px, 20px);
+    }
+
+    24% {
+        -ms-transform: translate(1px, 30px);
+    }
+
+    50% {
+        -ms-transform: translate(1px, 12px);
+    }
+
+    74% {
+        -ms-transform: translate(1px, 22px);
+    }
+
+    100% {
+        -ms-transform: translate(1px, 22px);
+    }
+}
+
+
+.err-Boxes{
+    border: 3px solid #ff1c1c;
+}
+
+::-webkit-scrollbar {
+    display: none; /* for Chrome, Safari, and Opera */
+  }
+  
+
+  .progress-bar {
+    position: fixed;
+    z-index: 999999;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 5px;
+    background: #16a34a;
+    transform-origin: 0%;
+  }
+
+  .rbc-calendar {
+    height: 90vh !important;
+  }
