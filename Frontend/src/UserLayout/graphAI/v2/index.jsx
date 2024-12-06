@@ -18,7 +18,7 @@ export default function GraphAI() {
   const [socket, setSocket] = useState(null);
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState('');
-  const SOCKET_URL = 'http://localhost:3000/ai-chat'; // Parent server WebSocket route
+  const SOCKET_URL = 'http://localhost:8080/ai-chat'; // Parent server WebSocket route
 
 
   const isInitialMount = useRef(true);
@@ -35,25 +35,25 @@ export default function GraphAI() {
     }
   }, []);
 
-  function initializeSocket(){
+  function initializeSocket() {
     console.log("Socket Running ...")
     const newSocket = io(SOCKET_URL, {
       transports: ['websocket'],
-  });
+    });
 
-  newSocket.on('connection', () => {
+    newSocket.on('connection', () => {
       console.log('Frontend connected to WebSocket!');
-  });
+    });
 
-  // newSocket.on('response', (data) => {
-  //     console.log('Received message from server:', data);
-  // });
+    // newSocket.on('response', (data) => {
+    //     console.log('Received message from server:', data);
+    // });
 
-  setSocket(newSocket);
+    setSocket(newSocket);
 
-  return () => {
+    return () => {
       newSocket.close();
-  };
+    };
   }
 
   useEffect(() => {

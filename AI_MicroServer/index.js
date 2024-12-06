@@ -15,6 +15,7 @@ const io = new Server(server,{
         origin: 'http://localhost:3000', // Replace with your frontend URL
         methods: ['GET', 'POST'],
         allowedHeaders: ['Content-Type'],
+        credentials: true,  // If you're using cookies or authentication headers
     },
 });
 
