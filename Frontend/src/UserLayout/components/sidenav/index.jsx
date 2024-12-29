@@ -15,7 +15,8 @@ export default function SideNav() {
 
   function logOutUser() {
     removeCookies();
-    window.location.reload();
+    navigate('/signin');
+    // window.location.reload();
   }
 
   function openCloseSideNav() {
