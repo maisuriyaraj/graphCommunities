@@ -23,20 +23,22 @@ app.use(cookieParser());
 import { authRoute } from './routes/auth.routes.js';
 import mongoose from 'mongoose';
 import { fetchRoute } from './routes/fetch.routes.js';
-import  { createProxyMiddleware } from 'http-proxy-middleware';
+import { aiRoutes } from './routes/ai.routes.js';
+// import  { createProxyMiddleware } from 'http-proxy-middleware';
 
 // Proxy middleware for forwarding WebSocket connections
-app.use(
-    '/ai-chat',
-    createProxyMiddleware({
-      target: "http://localhost:2001", // Microservice URL
-      changeOrigin: true,
-      ws: true, // Enable WebSocket proxying
-    })
-  );
+// app.use(
+//     '/ai-chat',
+//     createProxyMiddleware({
+//       target: "http://localhost:2001", // Microservice URL
+//       changeOrigin: true,
+//       ws: true, // Enable WebSocket proxying
+//     })
+//   );
 
 app.use('/api/v1',authRoute);
 app.use('/api/fetch',fetchRoute);
+app.use('/api/ai',aiRoutes);
 
 
 export default app;

@@ -8,7 +8,11 @@ const BASE_URL = "http://localhost:8080/"
 
 export async function getRequest(url, payload, headers = {}) {
     try {
-        const response = await axios.get(BASE_URL + url, {params : payload}, { headers});
+        const response = await axios.get(BASE_URL + url, {
+            params: payload, 
+            headers: headers, 
+            withCredentials: true, // Include credentials like cookies
+        });
         return response;
     } catch (error) {
         // Handle errors more gracefully
@@ -33,6 +37,7 @@ export async function getRequest(url, payload, headers = {}) {
         }
     }
 }
+
 
 export async function postRequest(url, payload, headers = {}) {
     try {

@@ -23,6 +23,10 @@ const chatHistorySchema = new mongoose.Schema(
 
 
 const chatSchema = new mongoose.Schema({
+    uuid: {
+        type: String,
+        required: true,
+    },
     chatTitle: {
         type: String,
     },

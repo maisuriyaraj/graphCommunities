@@ -11,6 +11,10 @@ export const isAuthorizedPerson = () => {
     return true;
 }
 
+export const getAccessTokens = () => {
+    return Cookies.get('access_token');
+}
+
 export const removeCookies = () => {
     Cookies.remove('access_token');
     Cookies.remove('referesh_token');

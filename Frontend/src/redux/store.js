@@ -6,6 +6,7 @@ import resetPasswordSlice from './AuthSlice/resetPassword.slice.js';
 import  verifyOtpSlice  from './AuthSlice/verifyOtp.slice.js';
 import  resend2FaMailSlice  from './AuthSlice/resendOtp.slice.js';
 import  getQuestionsListSlice  from './DashboardSlices/getQuestions.js';
+import { AIConfigsSlice } from './AISlice/Ai.js';
 
 export const store = configureStore({
   reducer: {
@@ -15,6 +16,7 @@ export const store = configureStore({
     resetPassword: resetPasswordSlice,
     verifyOtp:verifyOtpSlice,
     resend2famail : resend2FaMailSlice,
-    getQuestions : getQuestionsListSlice
+    getQuestions : getQuestionsListSlice,
+    AIConfigs : AIConfigsSlice
   },
 })
