@@ -16,7 +16,7 @@ export default function SideNav() {
   function logOutUser() {
     removeCookies();
     navigate('/signin');
-    // window.location.reload();
+    window.location.reload();
   }
 
   function openCloseSideNav() {
@@ -33,15 +33,8 @@ export default function SideNav() {
     <>
       <div className='bg-white fixed border top-0 border-solid border-r-[#e5e7eb] left-0 h-[100vh] py-4 show z-50' id='sideNav'>
         <div className="p-6 flex justify-center items-center cursor-pointer text-start space-x-3">
-          {/* <h2 className="font-normal logo text-2xl leading-6" id='logo' onClick={() => { goToHome('/dashboard') }}>
-            Graph <span>Community</span>
-          </h2> */}
         </div>
         <div className='flex flex-col items-center justify-center border-b mt-2 p-8 cursor-pointer relative'>
-          <div className='absolute top-0 right-2 md:hidden'>
-            <i className="bi bi-x-lg " onClick={() => openCloseSideNav()} ></i>
-          </div>
-          {/* onClick={() => goToHome('/dashboard/profile')} */}
           <div className='border image-section rounded-[50%] p-2' >
             <img src={"https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=80&w=1780&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"} className="rounded-[50%] object-cover" alt='avatar' width={100} />
           </div>

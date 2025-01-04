@@ -14,7 +14,7 @@ class SocketClient {
 
             // Handle connection success
             this.socket.on('connect', () => {
-                console.log('Connected to the server:', this.socket.id);
+                // console.log('Connected to the server:', this.socket.id);
             });
 
             // Handle connection errors
@@ -24,7 +24,7 @@ class SocketClient {
 
             // Handle disconnection
             this.socket.on('disconnect', (reason) => {
-                console.log('Disconnected from the server:', reason);
+                // console.log('Disconnected from the server:', reason);
             });
         }
     }
@@ -41,8 +41,6 @@ class SocketClient {
     emit(event, data) {
         if (this.socket) {
             this.socket.emit(event, data);
-        } else {
-            console.error('Socket is not connected. Call connect() first.');
         }
     }
 
@@ -50,8 +48,6 @@ class SocketClient {
     on(event, callback) {
         if (this.socket) {
             this.socket.on(event, callback);
-        } else {
-            console.error('Socket is not connected. Call connect() first.');
         }
     }
 
@@ -59,8 +55,6 @@ class SocketClient {
     off(event) {
         if (this.socket) {
             this.socket.off(event);
-        } else {
-            console.error('Socket is not connected. Call connect() first.');
         }
     }
 }
