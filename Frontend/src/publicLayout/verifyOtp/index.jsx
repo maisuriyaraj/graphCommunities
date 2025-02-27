@@ -8,11 +8,12 @@ import { ToastContainer } from 'react-toastify';
 import { resend2FaMail } from '../../redux/AuthSlice/resendOtp.slice';
 
 export default function VerifyOtp() {
-    const { response, status, error } = useSelector((state) => state.login);
+    const { response } = useSelector((state) => state.login);
     const twofamailData = useSelector((state) => state.resend2famail);
 
     const dispatch = useDispatch();
     const [user, setUser] = useState();
+    const [loading,setLoading] = useState(false);
     const [otp, setOtp] = useState(new Array(6).fill(""));
     const inputRefs = useRef([]);
     const navigate = useNavigate();
@@ -22,16 +23,13 @@ export default function VerifyOtp() {
         let temp = JSON.parse(sessionStorage.getItem('tempId'));
         setUser(response?.data?.data?.user || temp);
 
-        // Handler for the beforeunload event
         const handleBeforeUnload = (event) => {
-            event.preventDefault(); // Standard for most browsers
-            event.returnValue = ''; // Chrome requires setting this property
+            event.preventDefault();
+            event.returnValue = '';
         };
 
-        // Adding the event listener when the component mounts
         window.addEventListener("beforeunload", handleBeforeUnload);
 
-        // Cleanup the event listener when the component unmounts
         return () => {
             window.removeEventListener("beforeunload", handleBeforeUnload);
         };
@@ -40,10 +38,8 @@ export default function VerifyOtp() {
     const handleOtpChange = (val, key) => {
         if (!isNaN(val)) {
             let otpVal = [...otp];
-            otpVal[key - 1] = val;  // Adjusting for array indexing (index starts at 0)
+            otpVal[key - 1] = val; 
             setOtp(otpVal);
-
-            // Focus the next input if available
             if (val !== "" && key < 6) {
                 inputRefs.current[key].focus();
             }
@@ -51,7 +47,6 @@ export default function VerifyOtp() {
     };
 
     const handleKeyDown = (e, key) => {
-        // Handle backspace navigation to previous input
         if (e.key === 'Backspace' && otp[key - 1] === "") {
             if (key > 1) {
                 inputRefs.current[key - 2].focus();
@@ -61,16 +56,20 @@ export default function VerifyOtp() {
 
     const handleVerificationOTP = async (e) => {
         e.preventDefault();
+        setLoading(true);
         const payload = {
             userId: user, otp: otp.join("")
         }
-        const res = await dispatch(verifyOtp(payload));
-
-        if (res?.payload?.data?.message === "Request Successfull") {
-            setTimeout(() => {
-                navigate('/questions');
-            }, 500);
-        }
+        dispatch(verifyOtp({payload,onSucces:(res) => {
+            if (res?.data?.message === "Request Successfull") {
+                setTimeout(() => {
+                    navigate('/questions');
+                }, 500);
+                setLoading(false);
+            }
+        },onError:() => {
+            setLoading(false);
+        }}));
     }
 
     const resenOtp = () => {
@@ -115,7 +114,7 @@ export default function VerifyOtp() {
                                         className="w-full inline-flex justify-center items-center whitespace-nowrap rounded-lg bg-green-500 px-3.5 py-2.5 text-sm font-medium text-white shadow-sm shadow-green-950/10  focus:outline-none focus:ring focus:ring-green-300 focus-visible:outline-none focus-visible:ring focus-visible:ring-green-300 transition-colors duration-150"
                                     >
                                         {<p>Verify Account</p>}
-                                        {/* <img src={spinnerWhite} width={25} alt="" /> */}
+                                        {loading && <img src={spinnerWhite} width={25} alt="" />}
                                     </button>
                                 </div>
                             </form>

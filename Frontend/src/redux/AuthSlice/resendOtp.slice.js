@@ -13,9 +13,9 @@ export const resend2FaMail = createAsyncThunk('auth/resend2FaMail',async(payload
 });
 
 const initialState = {
-    response: {}, // List of users
-    status: 'idle', // 'idle' | 'loading' | 'succeeded' | 'failed'
-    error: null, // For storing error messages
+    response: {},
+    status: 'idle',
+    error: null,
   };
 
 export const resend2FaMailSlice = createSlice({

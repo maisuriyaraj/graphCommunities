@@ -2,20 +2,22 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { postRequest } from '../../utils/apiService.js';
 import { toast } from 'react-toastify';
 
-export const loginUser = createAsyncThunk('auth/loginUser',async(payload)=>{
+export const loginUser = createAsyncThunk('auth/loginUser',async({payload,onSucces,onError})=>{
     try {
         const response = await postRequest('api/v1/login', payload);
+        onSucces(response);
         return response;
 
     } catch (error) {
         toast.error(error.message);
+        onError(error);
     }
 });
 
 const initialState = {
-    response: {}, // List of users
-    status: 'idle', // 'idle' | 'loading' | 'succeeded' | 'failed'
-    error: null, // For storing error messages
+    response: {},
+    status: 'idle',
+    error: null,
   };
 
 export const loginUserSlice = createSlice({

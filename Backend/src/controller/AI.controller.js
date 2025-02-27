@@ -58,6 +58,8 @@ export async function createAIPrompt({ roomId, token, prompt }, socket) {
         // Emit updated chat history to frontend
         socket.emit('response', updateProms);
 
+        socket.emit('generating', { message: 'Generating AI response...',isGenerating:true });
+
         // Generate AI content
         const result = await model.generateContent(prompt);
         if (!result || !result.response?.candidates || result.response.candidates.length === 0) {
@@ -73,6 +75,7 @@ export async function createAIPrompt({ roomId, token, prompt }, socket) {
         );
 
         // Emit updated chat history to frontend
+        socket.emit('generating', { message: 'AI response generated successfully ...',isGenerating:false });
         socket.emit('response', updatedPrompts);
     } catch (error) {
         console.error("AI Response Error:", error);

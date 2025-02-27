@@ -15,13 +15,6 @@ export default function Articles() {
         getQuestions();
     }, []);
 
-    useEffect(() => {
-        if (response?.statusCode === 201) {
-            // setQuestions(response?.data || []);
-        }
-        console.log(response);
-    }, [response]);
-
     const TopArticles = lazy(() => import('./article'));
 
     const getQuestions = async (currentPage = 1, pageLimit = 10) => {

@@ -1,7 +1,6 @@
-import { useEffect, useState } from "react";
 import { object, ref, string } from 'yup';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -10,7 +9,7 @@ import { Loader } from "../../components/loader";
 
 export default function SignUp() {
 
-    const {response,status,error} = useSelector((state) => state.signup );
+    const {status} = useSelector((state) => state.signup );
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -29,25 +28,14 @@ export default function SignUp() {
             .oneOf([ref('password'), null], 'Passwords must match')
             .required('Confirm Password is required'),
     })
-
-    useEffect(()=>{
-        if (response?.data?.success) {
-          setTimeout(() => {
-            navigate('/signin');
-          }, 500);
-        }
     
-        console.log(response)
-      },[response,status]);
-    
-
     const showPasswordToggle = () => {
         let input1 = document.getElementById('password');
         let input2 = document.getElementById('confirm_password');
         let text = document.getElementById('passwordTxt');
 
         if (input1 !== null && input2 !== null) {
-            if (input1.type == 'password' && input2.type == 'password') {
+            if (input1.type === 'password' && input2.type === 'password') {
                 input1.type = 'text';
                 input2.type = 'text';
                 text.innerHTML = 'Hide password';
@@ -66,7 +54,13 @@ export default function SignUp() {
             password : data.password
         }
 
-        dispatch(signUpUser(payload));
+        dispatch(signUpUser({payload,onSucces : (response) => {
+            if (response?.data?.success) {
+                setTimeout(() => {
+                  navigate('/signin');
+                }, 500);
+              }
+        }, onError : (error) => {}}));
     }
     return (
         <main className='w-full' id='signIn'>
@@ -164,7 +158,7 @@ export default function SignUp() {
                                 <div className="flex flex-col space-y-5">
                                     <span className="flex items-center justify-center space-x-2">
                                         <span className="h-px bg-gray-400 w-14"></span>
-                                        <span className="font-normal text-gray-500">or Sign Up with</span>
+                                        <span className="font-normal text-gray-500">or Login with</span>
                                         <span className="h-px bg-gray-400 w-14"></span>
                                     </span>
                                     <div className="flex flex-col space-y-4">

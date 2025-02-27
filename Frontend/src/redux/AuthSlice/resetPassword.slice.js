@@ -13,9 +13,9 @@ export const resetPassword = createAsyncThunk('auth/resetPassword',async(payload
 });
 
 const initialState = {
-    response: {}, // List of users
-    status: 'idle', // 'idle' | 'loading' | 'succeeded' | 'failed'
-    error: null, // For storing error messages
+    response: {}, 
+    status: 'idle',
+    error: null,
   };
 
 export const resetPasswordSlice = createSlice({

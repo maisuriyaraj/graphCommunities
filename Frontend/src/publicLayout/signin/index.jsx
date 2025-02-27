@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import Cookies from 'js-cookie';
+import React, { useState } from 'react';
 import './signIn.css';
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { object, string } from 'yup';
 import { ErrorMessage, Field, Formik, Form } from 'formik';
@@ -12,21 +11,9 @@ import { Loader } from '../../components/loader';
 
 export default function SignIn() {
 
-  const { response, status, error } = useSelector((state) => state.login);
-  const [token, setToken] = useState(document.cookie);
-  const [openOtpModal, setOtpModal] = useState(false);
-  const [currentUser, setUser] = useState();
+  const { status } = useSelector((state) => state.login);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-
-  // useEffect(()=>{
-  //   if (response?.data?.success) {
-  //     setTimeout(() => {
-  //       navigate('/questions');
-  //     }, 500);
-  //   }
-  // },[response,status]);
 
 
   const initialValues = {
@@ -61,22 +48,22 @@ export default function SignIn() {
       email: data.field,
       password: data.password
     }
-    const res = await dispatch(loginUser(payload));
-    if (res?.payload?.data?.data?.TwoFAEnabled) {
-      sessionStorage.setItem('tempId',JSON.stringify(res?.payload?.data?.data?.user));
-      setTimeout(() => {
-        navigate('/verifyOtp');
-      }, 500);
-    }
-
-    if (res?.payload?.data?.message === "Request Successfull") {
-      setTimeout(() => {
-        navigate('/questions');
-      }, 500);
-    }
-
-
-    console.log("FROM LOFIN", res);
+    dispatch(loginUser({payload,
+      onSucces : (res) => {
+        if (res?.data?.data?.TwoFAEnabled) {
+          sessionStorage.setItem('tempId',JSON.stringify(res?.data?.data?.user));
+          setTimeout(() => {
+            navigate('/verifyOtp');
+          }, 500);
+        }
+    
+        if (res?.data?.message === "Request Successfull") {
+          setTimeout(() => {
+            navigate('/questions');
+          }, 500);
+        }
+      },
+    onError : () => {}}));
   }
 
   return (
@@ -86,7 +73,6 @@ export default function SignIn() {
 
         {status === 'loading' && <Loader isLoading={true} />}
         <div className="lg:flex items-center min-h-screen p-4 bg-gray-100 lg:justify-center">
-          {openOtpModal && <></>}
           <div
             className="flex flex-col overflow-hidden bg-white rounded-md shadow-lg max md:flex-row md:flex-1 lg:max-w-screen-md"
           >
@@ -159,7 +145,7 @@ export default function SignIn() {
                   <div className="flex flex-col space-y-5">
                     <span className="flex items-center justify-center space-x-2">
                       <span className="h-px bg-gray-400 w-14"></span>
-                      <span className="font-normal text-gray-500">or login with</span>
+                      <span className="font-normal text-gray-500">or Signup with</span>
                       <span className="h-px bg-gray-400 w-14"></span>
                     </span>
                     <div className="flex flex-col space-y-4">
