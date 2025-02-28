@@ -1,9 +1,7 @@
 "use client";
 import React, { useEffect } from 'react';
-// import avatar from '../../../../../public/user.png';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { removeCookies } from '../../../utils/CookiesService';
-// import '../../global.css';
 export default function SideNav() {
 
   const navigate = useNavigate();
@@ -19,14 +17,6 @@ export default function SideNav() {
     window.location.reload();
   }
 
-  function openCloseSideNav() {
-    let nav = document.getElementById('sideNav');
-    if (nav) {
-      nav.classList.add('hide');
-      nav.classList.remove('show');
-    }
-  }
-
 
   return (
 
@@ -39,18 +29,11 @@ export default function SideNav() {
             <img src={"https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=80&w=1780&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"} className="rounded-[50%] object-cover" alt='avatar' width={100} />
           </div>
           <div className='text-center mt-1'>
-            {/* <p className='font-bold text-xl'>{userData?.userName}</p> */}
             <span className='text-sm font-semibold text-gray-600'>Co-Manager</span>
           </div>
         </div>
         <div className="flex flex-col border-b">
           <ul className='p-2'>
-            {/* <li className={`p-2 nav-link-1 cursor-pointer hover:bg-gray-200 ${path === '/dashboard' ? 'text-white' : ''} mt-1`}>
-              <Link href="/dashboard"><p className='flex justify-between cursor-pointer'>
-                Dashboard
-                <i className="bi bi-body-text"></i>
-              </p></Link>
-            </li> */}
             <li className={`p-3 rounded-lg transition-all nav-link-1 cursor-pointer  ${path === '/questions' ? 'text-white bg-green-500' : 'hover:bg-gray-200'} mt-1`}>
               <Link to="/questions"><p className='flex justify-between cursor-pointer'>
                 Questions

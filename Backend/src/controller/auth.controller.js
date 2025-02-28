@@ -148,11 +148,12 @@ export async function Registration(request, response) {
     try {
         /**
          *  Algorithm for Registration Function flow
+         * Get username,email,password from req.body
+         * Put Validation on it
+         * Check User is Already Exists or not 
+         * If values are valid than save it Database
          */
-        // Get username,email,password from req.body
-        // Put Validation on it
-        // Check User is Already Exists or not 
-        // If values are valid than save it Database
+        
 
         /**
          *  1 .  Get username,email,password from req.body
@@ -324,9 +325,6 @@ export async function resetPassword(request, response) {
             });
 
             const authTokens = await authTokenModel.findOne({ user_id:request.user_id  });
-
-            // Use the `unset` method to remove the field
-            authTokens.unset('fieldNameToRemove');
 
             await authTokens.save();
 

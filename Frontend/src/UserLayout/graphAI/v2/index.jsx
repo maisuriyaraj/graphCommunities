@@ -252,21 +252,21 @@ export default function GraphAI() {
                     commands.bold,
                     commands.italic,
                     commands.strikethrough,
-                      {
-                        name: "emoji",
-                        keyCommand: "emoji",
-                        buttonProps: { "aria-label": "Insert emoji" },
-                        icon: <span><i className="bi bi-emoji-smile"></i></span>,
-                        execute: () => toggleEmojiPicker(),
-                      },
-                    ]}
+                    {
+                      name: "emoji",
+                      keyCommand: "emoji",
+                      buttonProps: { "aria-label": "Insert emoji" },
+                      icon: <span><i className="bi bi-emoji-smile"></i></span>,
+                      execute: () => toggleEmojiPicker(),
+                    },
+                  ]}
                   extraCommands={[]}
                 />
                 {showEmojiPicker && (
-        <div style={{ position: "absolute", top:"-450px", zIndex: 1000 }}>
-          <EmojiPicker onEmojiClick={handleEmojiClick} />
-        </div>
-      )}
+                  <div style={{ position: "absolute", top: "-450px", zIndex: 1000 }}>
+                    <EmojiPicker onEmojiClick={handleEmojiClick} />
+                  </div>
+                )}
                 <div className="absolute right-4 flex top-9">
                   {userPrompt && (
                     <button
