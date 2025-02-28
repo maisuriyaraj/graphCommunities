@@ -9,27 +9,6 @@ const genAI = new GoogleGenerativeAI(apiKey);
 const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
 
-// export async function createAIPrompt({roomId,token,prompt},socket) {
-//     try {
-//         // Validate and decode the JWT token
-//         const decodedToken = jwt.verify(token, process.env.ACCESS_TOKEN_SECREATE);
-//         if(!decodedToken) throw new Error("Invalid Token");
-
-//         // Save User Prompt In DB
-//         const userPrompt = { sender: 'user', message: prompt };
-//         await AIChatModel.findOneAndUpdate({uuid : roomId},{ $push: { chatHistory: userPrompt } },{ new: true });
-
-//         const result = await model.generateContent(prompt);
-
-//         const aiResponse = { sender: 'AI', message: result?.response?.candidates[0]?.content?.parts[0]?.text };
-//         const uppdatedPrompts = await AIChatModel.findOneAndUpdate({uuid : roomId},{ $push: { chatHistory: aiResponse } },{ new: true });
-
-//         socket.emit('response', uppdatedPrompts);
-//     } catch (error) {
-//         console.log("AI Response Error ", error);
-//     }
-// }
-
 export async function createAIPrompt({ roomId, token, prompt }, socket) {
     try {
         // Validate input data

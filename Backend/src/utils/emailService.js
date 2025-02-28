@@ -14,8 +14,8 @@ export function sendEmailService(email, mailBody) {
             port: 587,
             secure: false,
             auth: {
-                user: 'rajmaisuria111@gmail.com',
-                pass: 'pmks qvya coug ekih'
+                user: process.env.EMAIL_MENTOR,
+                pass: process.env.EMAIL_PASS
             },
             tls: {
                 rejectUnauthorized: false
