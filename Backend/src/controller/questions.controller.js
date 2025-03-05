@@ -45,22 +45,70 @@ export async function fetchDataFromStackOverflow(request, response) {
     }
 }
 
-export async function getQuestions(request,response){
-    try {
-        const page = request?.query?.page || 1;
-        const limit = request?.query?.limit || 10;
-        const resultData = await questionsModel.find({}).skip(page * limit).limit(limit).exec();
-        const count = await questionsModel.countDocuments({});
+// export async function getQuestions(request,response){
+//     try {
+//         const page = request?.query?.page || 1;
+//         const limit = request?.query?.limit || 10;
+//         const resultData = await questionsModel.find({}).skip(page * limit).limit(limit).exec();
+//         const count = await questionsModel.countDocuments({});
 
-        const data = {
-            mainData : resultData,
-            count : count
+//         const data = {
+//             mainData : resultData,
+//             count : count
+//         }
+
+//         response.status(201).json(new APIResponse(201,data,"Questions Fetched Successfully !"));
+//     } catch (error) {
+//         console.log("Error While fetching Questions :",error);
+//         response.status(500).send({ error: 'Internal Server Error' });
+
+//     }
+// }
+
+const shuffleArray = (array) => {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]]; // Swap elements
+    }
+    return array;
+};
+
+export async function getQuestions(request, response) {
+    try {
+        let page = parseInt(request.query.page) || 1;
+        let limit = parseInt(request.query.limit) || 10;
+
+        if (page < 1 || limit < 1) {
+            return response.status(400).json(new APIResponse(400, null, "Page and limit must be positive numbers."));
         }
 
-        response.status(201).json(new APIResponse(201,data,"Questions Fetched Successfully !"));
-    } catch (error) {
-        console.log("Error While fetching Questions :",error);
-        response.status(500).send({ error: 'Internal Server Error' });
+        const totalRecords = await questionsModel.countDocuments();
 
+        const totalPages = Math.ceil(totalRecords / limit);
+
+        if (totalRecords === 0) {
+            return response.status(404).json(new APIResponse(404, null, "No Questions Found!"));
+        }
+
+        let resultData = await questionsModel
+            .find({})
+            .skip((page - 1) * limit)
+            .limit(limit)
+            .lean();
+
+        resultData = shuffleArray(resultData);
+
+        const data = {
+            questions: resultData,
+            totalRecords,
+            totalPages,
+            currentPage: page,
+            pageSize: limit
+        };
+
+        return response.status(200).json(new APIResponse(200, data, "Questions Fetched Successfully!"));
+    } catch (error) {
+        console.error("Error While Fetching Questions:", error);
+        return response.status(500).json(new APIResponse(500, null, "Internal Server Error"));
     }
 }

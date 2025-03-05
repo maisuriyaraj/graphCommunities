@@ -1,4 +1,5 @@
 import React, { lazy, Suspense, useEffect, useState } from 'react';
+import { Helmet } from 'react-helmet-async';
 import { useDispatch, useSelector } from 'react-redux';
 import { HashLoaderComponent } from '../../components/loader';
 // import { getQuestionsList } from '../../redux/DashboardSlices/getQuestions';
@@ -37,8 +38,18 @@ export default function TopFeed() {
     }
 
     return (
-        <Suspense fallback={<div className='w-full flex justify-center items-center'><HashLoaderComponent/> </div>}>
-            <TopFeed articles={articles} />
-        </Suspense>
+        <>
+            <Helmet>
+                <title>Feed | Graph Community</title>
+                <meta name="description" content="Find answers to the most frequently asked questions on our platform." />
+                <meta name="keywords" content="questions, answers, discussion, help" />
+                <meta property="og:title" content="Top Questions" />
+                <meta property="og:description" content="Find answers to the most frequently asked questions on our platform." />
+                <meta property="og:type" content="website" />
+            </Helmet>
+            <Suspense fallback={<div className='w-full flex justify-center items-center'><HashLoaderComponent /> </div>}>
+                <TopFeed articles={articles} />
+            </Suspense>
+        </>
     )
 }

@@ -14,6 +14,7 @@ import Articles from "../UserLayout/articles";
 import TopFeed from "../UserLayout/explores";
 import AddPostComponent from "../UserLayout/addPost";
 import GraphAI from "../UserLayout/graphAI/v2";
+import ChatModule from "../UserLayout/chat";
 
 export function AppRouter() {
     return (
@@ -53,6 +54,11 @@ export function AppRouter() {
                     <Route path="graphAI" element={
                         <ProtectedRoute>
                             <GraphAI />
+                        </ProtectedRoute>
+                    } />
+                    <Route path="chats" element={
+                        <ProtectedRoute>
+                            <ChatModule />
                         </ProtectedRoute>
                     } />
                 </Route>

@@ -24,6 +24,7 @@ import { authRoute } from './routes/auth.routes.js';
 import mongoose from 'mongoose';
 import { fetchRoute } from './routes/fetch.routes.js';
 import { aiRoutes } from './routes/ai.routes.js';
+import { assetsRoutes } from './routes/assets.routes.js';
 // import  { createProxyMiddleware } from 'http-proxy-middleware';
 
 // Proxy middleware for forwarding WebSocket connections
@@ -39,6 +40,7 @@ import { aiRoutes } from './routes/ai.routes.js';
 app.use('/api/v1',authRoute);
 app.use('/api/fetch',fetchRoute);
 app.use('/api/ai',aiRoutes);
+app.use('/api/upload',assetsRoutes);
 
 
 export default app;

@@ -1,6 +1,7 @@
 import React, { lazy, Suspense, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { HashLoaderComponent } from '../../components/loader';
+import { Helmet } from 'react-helmet-async';
 // import { getQuestionsList } from '../../redux/DashboardSlices/getQuestions';
 
 export default function Articles() {
@@ -30,8 +31,19 @@ export default function Articles() {
     }
 
     return (
-        <Suspense fallback={<div className='w-full flex justify-center items-center'><HashLoaderComponent /> </div>}>
-            <TopArticles articles={articles} />
-        </Suspense>
+        <>
+            <Helmet>
+                <title>Articles | Graph Community</title>
+                <meta name="description" content="Find answers to the most frequently asked questions on our platform." />
+                <meta name="keywords" content="questions, answers, discussion, help" />
+                <meta property="og:title" content="Top Questions" />
+                <meta property="og:description" content="Find answers to the most frequently asked questions on our platform." />
+                <meta property="og:type" content="website" />
+            </Helmet>
+            <Suspense fallback={<div className='w-full flex justify-center items-center'><HashLoaderComponent /> </div>}>
+                <TopArticles articles={articles} />
+            </Suspense>
+
+        </>
     )
 }
